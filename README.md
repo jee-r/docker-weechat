@@ -3,7 +3,6 @@
 [![Drone (cloud) master build](https://img.shields.io/drone/build/jee-r/docker-weechat/master?label=master%20build&style=flat-square)](https://cloud.drone.io/jee-r/docker-weechat)
 [![Drone (cloud) dev build](https://img.shields.io/drone/build/jee-r/docker-weechat/dev?label=dev%20build&style=flat-square)](https://cloud.drone.io/jee-r/docker-weechat)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/j33r/weechat?style=flat-square)](https://microbadger.com/images/j33r/weechat)
-[![MicroBadger Layers](https://img.shields.io/microbadger/layers/j33r/weechat?style=flat-square)](https://microbadger.com/images/j33r/weechat)
 [![Docker Pulls](https://img.shields.io/docker/pulls/j33r/weechat?style=flat-square)](https://hub.docker.com/r/j33r/weechat)
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/weechat-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/weechat)
 
