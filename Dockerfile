@@ -18,7 +18,8 @@ RUN apk update && \
       weechat-lua \
       weechat-perl \
       weechat-ruby \
-      weechat-spell && \
+      weechat-spell \
+      tzdata && \
     rm -rf /tmp/* /var/cache/apk/*
 
 EXPOSE 8000 8002
