@@ -12,7 +12,7 @@ ENV HOME=/config \
 
 RUN apk update && \
     apk upgrade && \
-    apk add --no-cache --upgrade \
+    apk add --no-cache --virtual=base --upgrade \
       weechat \
       weechat-python \
       weechat-lua \
