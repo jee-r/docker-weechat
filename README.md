@@ -10,10 +10,10 @@ A docker image for [weechat](https://weechat.org) ![weechat logo](https://weecha
 
 # Supported tags
 
-| Tags | Size | Layers |
-|-|-|-|
-| `latest`, `stable` | ![](https://img.shields.io/docker/image-size/j33r/weechat/latest?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/weechat/latest?style=flat-square) |
-| `dev` | ![](https://img.shields.io/docker/image-size/j33r/weechat/dev?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/weechat/dev?style=flat-square) |
+| Tags | Size |
+|-|-|
+| `latest`, `stable` | ![](https://img.shields.io/docker/image-size/j33r/weechat/latest?style=flat-square) |
+| `dev` | ![](https://img.shields.io/docker/image-size/j33r/weechat/dev?style=flat-square) |
 
 # What is weechat ?
 
