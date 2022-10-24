@@ -1,0 +1,20 @@
+name: Mirroring to remote repos
+on:
+  push:
+    branches:
+      - main
+jobs:
+  mirroring:
+    name: Mirror
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: mirror to gitlab.com
+        uses: jee-r/docker-git-mirror@v1
+        with:
+          remote_repo: "gitlab.com/jee-r/docker-weechat.git"
+          remote_repo_username: ${{ secrets.GITLAB_USER }}
+          remote_repo_password: ${{ secrets.GITLAB_TOKEN }}
