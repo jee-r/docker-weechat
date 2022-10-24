@@ -1,7 +1,14 @@
 {
-  "extends": [
-    "config:base"
-  ],
-  "assigneesFromCodeOwners": true,
-  "baseBranches": ["main"]
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"assigneesFromCodeOwners": true,
+	"baseBranches": ["main"],
+	"extends": ["config:base"],
+	"regexManagers": [
+		{
+			"fileMatch": ["(^|/)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"],
+			"matchStrings": [
+				"#\\srenovate:\\sdatasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?\\s(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
+			]
+		}
+	]
 }
