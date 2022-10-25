@@ -57,13 +57,21 @@ RUN set -eux ; \
       .. \
       -DCMAKE_INSTALL_PREFIX=/opt/weechat \
       -DENABLE_MAN=ON \
-      -DENABLE_SCRIPT=OFF \
-      -DENABLE_SCRIPTS=OFF \
-      -DENABLE_SPELL=OFF \
       -DENABLE_HEADLESS=ON \
     ; \
     make -j $(nproc) ; \
     make install
+
+FROM builder as weechat-matrix-builder
+LABEL stage=build
+WORKDIR /tmp
+
+COPY build/weechat-matrix .
+
+RUN apk update ; \
+    apk add --no-cache abuild ; \
+    abuild-keygen -a -n ; \
+    REPODEST=/tmp/out abuild -F -r
 
 FROM alpine:3.16
 
@@ -79,6 +87,7 @@ ENV HOME=/config \
     LANG=C.UTF-8
 
 COPY --from=builder /opt/weechat /opt/weechat
+COPY --from=weechat-matrix-builder /tmp/out/*/*.apk /pkgs/
 
 RUN apk update ; \
     apk upgrade ; \
@@ -104,6 +113,7 @@ RUN apk update ; \
       python3 \
       ruby-libs \
       tcl ; \
+		apk add --no-cache --allow-untrusted /pkgs/* ; \
     rm -rf /tmp/* /var/cache/apk/* ; \
 		ln -sf /opt/weechat/bin/weechat /usr/bin/weechat ; \
 		ln -sf /opt/weechat/bin/weechat-headless /usr/bin/weechat-headless

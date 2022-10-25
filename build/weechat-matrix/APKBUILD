@@ -1,0 +1,63 @@
+# Contributor: Clayton Craft <clayton@craftyguy.net>
+# Maintainer: Clayton Craft <clayton@craftyguy.net>
+pkgname=weechat-matrix
+pkgver=0.3.0_git20220908
+pkgrel=0
+_commit="989708d1fa8fcee6d5bbb4c19a7d66f14d84fd5b"
+pkgdesc="WeeChat Matrix protocol script"
+url="https://github.com/poljar/weechat-matrix"
+arch="noarch"
+license="MIT"
+depends="
+	py3-aiohttp
+	py3-attrs
+	py3-magic
+	py3-matrix-nio
+	py3-openssl
+	py3-pygments
+	py3-requests
+	py3-webcolors
+	python3
+	weechat
+	weechat-python
+	xdg-utils
+	"
+makedepends="
+	poetry
+	py3-build
+	py3-importlib-metadata
+	py3-installer
+	py3-poetry-core
+	py3-setuptools
+	py3-wheel
+	"
+checkdepends="
+	py3-hypothesis
+	py3-pytest
+	"
+install="$pkgname.post-install"
+source="$pkgname-$_commit.tar.gz::https://github.com/poljar/weechat-matrix/archive/$_commit.tar.gz"
+builddir="$srcdir/$pkgname-$_commit"
+
+build() {
+	# XXX: hack for poetry to not ignore files
+	GIT_DIR=. python3 -m build --skip-dependency-check --no-isolation --wheel .
+}
+
+check() {
+	python3 -m pytest
+}
+
+package() {
+	python3 -m installer --destdir="$pkgdir" dist/*.whl
+	install -Dm755 main.py "$pkgdir/usr/share/weechat/python/weechat-matrix.py"
+
+	for _script in matrix_decrypt matrix_sso_helper matrix_upload
+	do
+		install -Dm755 "contrib/$_script.py" "$pkgdir/usr/bin/$_script"
+	done
+}
+
+sha512sums="
+e60dce9ea88217d6a87dcf1d81c7934c921986575654fd4c312d00b5299cf97051bfa71cfeb3e475066831f931ad6169e953b57bbb573a43479b1c04313d9e93  weechat-matrix-989708d1fa8fcee6d5bbb4c19a7d66f14d84fd5b.tar.gz
+"
