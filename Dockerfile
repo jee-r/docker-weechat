@@ -1,4 +1,4 @@
-FROM alpine:3.16 as builder
+FROM alpine:3.17 as builder
 LABEL stage=build
 
 ENV HOME=/config \
@@ -73,7 +73,7 @@ RUN apk update ; \
     abuild-keygen -a -n ; \
     REPODEST=/tmp/out abuild -F -r
 
-FROM alpine:3.16
+FROM alpine:3.17
 
 LABEL name="docker-weechat" \
       maintainer="Jee jee@jeer.fr" \
