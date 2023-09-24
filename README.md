@@ -1,7 +1,7 @@
 # docker-weechat
 
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/j33r/weechat?style=flat-square)](https://microbadger.com/images/j33r/weechat)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-weechat/Deploy/master?style=flat-square)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/jee-r/docker-weechat/deploy.yaml?branch=main&style=flat-square)
 [![Docker Pulls](https://img.shields.io/docker/pulls/j33r/weechat?style=flat-square)](https://hub.docker.com/r/j33r/weechat)
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/weechat-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/weechat)
 [![ghcr.io](https://img.shields.io/badge/ghrc%2Eio-jee%2D-r/weechat-%232496ED?logo=github&style=flat-square)](https://ghcr.io/jee-r/weechat)
