@@ -107,7 +107,6 @@ RUN apk update ; \
       ruby-libs \
       aspell-libs \
       aspell-dev ; \
-    apk add --no-cache --allow-untrusted /pkgs/* ; \
     rm -rf /tmp/* /var/cache/apk/* ; \
 		ln -sf /opt/weechat/bin/weechat /usr/bin/weechat ; \
 		ln -sf /opt/weechat/bin/weechat-headless /usr/bin/weechat-headless
