@@ -80,34 +80,33 @@ RUN apk update ; \
     apk add --no-cache --virtual=base --upgrade \
       ca-certificates \
       gettext \
+	    gettext-dev \
       gnutls \
+	    gnutls-dev \
       libcurl \
+	    curl-dev \
       libgcrypt \
+	    libgcrypt-dev \
       ncurses-libs \
+	    ncurses-dev \
       ncurses-terminfo \
       tzdata \
       zlib \
+	    zlib-dev \
       zstd \
       zstd-libs \
-      aspell-libs \
-      lua5.3-libs \
-      perl \
+	    zstd-dev \
       python3 \
       python3-dev \
-      aspell-dev \ 
-	    curl-dev \
-	    gettext-dev \
-	    gnutls-dev \
-	    libgcrypt-dev \
-	    lua-dev \
-	    ncurses-dev \
-	    perl-dev \
-	    python3-dev \
-	    ruby-dev \
-	    zlib-dev \
-	    zstd-dev \
       py3-requests \
-      ruby-libs ; \
+	    lua-dev \
+      lua5.3-libs \
+      perl \
+	    perl-dev \
+	    ruby-dev \
+      ruby-libs \
+      aspell-libs \
+      aspell-dev ; \
     apk add --no-cache --allow-untrusted /pkgs/* ; \
     rm -rf /tmp/* /var/cache/apk/* ; \
 		ln -sf /opt/weechat/bin/weechat /usr/bin/weechat ; \
