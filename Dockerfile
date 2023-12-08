@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.19
 
 LABEL name="docker-weechat" \
       maintainer="Jee jee@jeer.fr" \
