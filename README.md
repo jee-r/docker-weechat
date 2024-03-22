@@ -7,7 +7,8 @@
 [![ghcr.io](https://img.shields.io/badge/ghrc%2Eio-jee%2D-r/weechat-%232496ED?logo=github&style=flat-square)](https://ghcr.io/jee-r/weechat)
 
 
-A docker image for [weechat](https://weechat.org) ![weechat logo](https://weechat.org/media/images/favicon.png)
+A docker image for [weechat](https://weechat.org) ![weechat logo](https://weechat.org/media/images/favicon.png)  
+Check out my [Glowing-bear docker image](https://github.com/jee-r/docker-glowing-bear) if you need WebUI.
 
 ## What is weechat ?
 
