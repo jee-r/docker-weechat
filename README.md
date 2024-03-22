@@ -8,7 +8,7 @@
 
 
 A docker image for [weechat](https://weechat.org) ![weechat logo](https://weechat.org/media/images/favicon.png)  
-Check out my [Glowing-bear docker image](https://github.com/jee-r/docker-glowing-bear) if you need WebUI.
+Check out my [Glowing-bear docker image](https://github.com/jee-r/docker-glowing-bear) if you need a WebUI.
 
 ## What is weechat ?
 
