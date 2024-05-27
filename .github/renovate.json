@@ -1,14 +1,21 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"assigneesFromCodeOwners": true,
-	"baseBranches": ["main"],
-	"extends": ["config:base"],
-	"regexManagers": [
-		{
-			"fileMatch": ["(^|/)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"],
-			"matchStrings": [
-				"#\\srenovate:\\sdatasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?\\s(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
-			]
-		}
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ],
+  "assigneesFromCodeOwners": true,
+  "baseBranches": ["main"],
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"],
+      "matchStrings": [
+        "#\\srenovate:\\sdatasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?\\s(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
+      ]
+    }
+  ]
 }
