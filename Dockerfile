@@ -30,6 +30,7 @@ RUN apk update ; \
     ruby-dev \
     zlib-dev \
     zstd-dev \
+    cjson-dev \
     asciidoctor \
     cmake \
     samurai ; \
@@ -95,6 +96,7 @@ RUN apk update ; \
     zstd \
     zstd-libs \
     zstd-dev \
+    cjson-dev \
     python3 \
     python3-dev \
     py3-requests \
