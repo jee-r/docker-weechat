@@ -1,4 +1,4 @@
-FROM alpine:3.21 as weechat-builder
+FROM alpine:3.21 AS weechat-builder
 LABEL stage=build
 
 ENV HOME=/config \
