@@ -1,4 +1,4 @@
-FROM alpine:3.21 AS weechat-builder
+FROM alpine:3.22 AS weechat-builder
 LABEL stage=build
 
 ENV HOME=/config \
@@ -60,7 +60,7 @@ RUN apk update ; \
   make -j $(nproc) ; \
   make install
 
-FROM alpine:3.21
+FROM alpine:3.22
 
 LABEL name="docker-weechat" \
   maintainer="Jee jee@jeer.fr" \
