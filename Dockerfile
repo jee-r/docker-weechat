@@ -7,10 +7,12 @@ ENV HOME=/config \
 
 ARG WEECHAT_VERSION="stable"
 
-RUN apk update ; \
+RUN set -eux; \
+  apk update ; \
   apk upgrade ; \
   apk add --no-cache \
     build-base \
+    gnupg \
     curl \
     gpg \
     tcl-dev \
@@ -37,31 +39,37 @@ RUN apk update ; \
 
 # Get, verify and extract Weechat
 WORKDIR /tmp
-RUN curl -o weechat.tar.xz "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz" ; \
-      if [ "$WEECHAT_VERSION" != "devel" ] ; then \
-        curl -o weechat.tar.xz.asc "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz.asc" ; \
-        export GNUPGHOME="$(mktemp -d)" ; \
-        gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8 ; \
-        gpg --batch --no-tty --pinentry-mode loopback --verify weechat.tar.xz.asc weechat.tar.xz ; \
-        gpgconf --kill all ; \
-    fi ; \
-  mkdir -p /tmp/weechat/build ; \
-  tar -xf /tmp/weechat.tar.xz -C /tmp/weechat --strip-components 1
+RUN set -eux; \
+    curl -o weechat.tar.xz "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz"; \
+    if [ "$WEECHAT_VERSION" != "devel" ]; then \
+        curl -o weechat.tar.xz.asc "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz.asc"; \
+        export GNUPGHOME="$(mktemp -d)"; \
+        # Import key without triggering gpg-agent
+        gpg --batch --no-tty --pinentry-mode loopback \
+            --keyserver hkps://keys.openpgp.org \
+            --recv-keys A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8; \
+        # Verify tarball
+        gpg --batch --no-tty --pinentry-mode loopback --trust-model always \
+            --verify weechat.tar.xz.asc weechat.tar.xz; \
+        rm -rf "$GNUPGHOME"; \
+    fi; \
+    mkdir -p /tmp/weechat/build; \
+    tar -xf /tmp/weechat.tar.xz -C /tmp/weechat --strip-components 1
 
 # Build Weechat
-WORKDIR /tmp/weechat  
-RUN cd /tmp/weechat/build ; \
-  cmake \
-    .. \
-    -DENABLE_TESTS=ON \
-    -DCMAKE_INSTALL_PREFIX=/opt/weechat \
-    -DENABLE_MAN=ON \
-    -DENABLE_HEADLESS=ON \
-    -DENABLE_JAVASCRIPT=OFF \
-    -DENABLE_PHP=OFF \
-  ; \
-  make -j $(nproc) ; \
-  make install
+WORKDIR /tmp/weechat/build 
+RUN set -eux; \
+    cmake \
+      .. \
+      -DENABLE_TESTS=ON \
+      -DCMAKE_INSTALL_PREFIX=/opt/weechat \
+      -DENABLE_MAN=ON \
+      -DENABLE_HEADLESS=ON \
+      -DENABLE_JAVASCRIPT=OFF \
+      -DENABLE_PHP=OFF \
+    ; \
+    make -j $(nproc) ; \
+    make install
 
 # Build final image
 FROM alpine:3.22
@@ -79,7 +87,8 @@ ENV HOME=/config \
   TERM=screen-256color \
   LANG=C.UTF-8
 
-RUN apk update ; \
+RUN set -eux; \
+  apk update ; \
   apk upgrade ; \
   apk add --no-cache --virtual=base --upgrade \
     ca-certificates \
