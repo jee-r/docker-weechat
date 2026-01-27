@@ -5,7 +5,7 @@ ENV HOME=/config \
   TERM=screen-256color \
   LANG=C.UTF-8
 
-ARG WEECHAT_VERSION="stable"
+ARG WEECHAT_VERSION="4.8.1"
 
 RUN set -eux; \
   apk update ; \
