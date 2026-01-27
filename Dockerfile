@@ -1,4 +1,4 @@
-FROM alpine:3.22 AS weechat-builder
+FROM alpine:3.23 AS weechat-builder
 LABEL stage=build
 
 ENV HOME=/config \
@@ -72,7 +72,7 @@ RUN set -eux; \
     make install
 
 # Build final image
-FROM alpine:3.22
+FROM alpine:3.23
 
 LABEL name="docker-weechat" \
   maintainer="Jee jee@jeer.fr" \
