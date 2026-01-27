@@ -23,7 +23,7 @@ RUN apk update ; \
     gettext-dev \
     gnutls-dev \
     libgcrypt-dev \
-    lua-dev \
+    lua5.4-dev \
     ncurses-dev \
     perl-dev \
     python3-dev \
@@ -100,8 +100,8 @@ RUN apk update ; \
     python3 \
     python3-dev \
     py3-requests \
-    lua-dev \
-    lua5.3-libs \
+    lua5.4-dev \
+    lua5.4-libs \
     perl \
     perl-dev \
     ruby-dev \
