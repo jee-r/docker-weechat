@@ -33,21 +33,24 @@ RUN apk update ; \
     cjson-dev \
     asciidoctor \
     cmake \
-    samurai ; \
-  # download WeeChat
-  cd /tmp ; \
-  curl -o weechat.tar.xz "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz" ; \
-  if [ "$WEECHAT_VERSION" != "devel" ] ; then \
-      curl -o weechat.tar.xz.asc "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz.asc" ; \
-      export GNUPGHOME="$(mktemp -d)" ; \
-      gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8 ; \
-      gpg --batch --verify /tmp/weechat.tar.xz.asc /tmp/weechat.tar.xz ; \
-      gpgconf --kill all ; \
-  fi ; \
-  # build WeeChat
+    samurai
+
+# Get, verify and extract Weechat
+WORKDIR /tmp
+RUN curl -o weechat.tar.xz "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz" ; \
+      if [ "$WEECHAT_VERSION" != "devel" ] ; then \
+        curl -o weechat.tar.xz.asc "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz.asc" ; \
+        export GNUPGHOME="$(mktemp -d)" ; \
+        gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8 ; \
+        gpg --batch --no-tty --pinentry-mode loopback --verify weechat.tar.xz.asc weechat.tar.xz ; \
+        gpgconf --kill all ; \
+    fi ; \
   mkdir -p /tmp/weechat/build ; \
-  tar -xf /tmp/weechat.tar.xz -C /tmp/weechat --strip-components 1 ; \
-  cd /tmp/weechat/build ; \
+  tar -xf /tmp/weechat.tar.xz -C /tmp/weechat --strip-components 1
+
+# Build Weechat
+WORKDIR /tmp/weechat  
+RUN cd /tmp/weechat/build ; \
   cmake \
     .. \
     -DENABLE_TESTS=ON \
@@ -60,6 +63,7 @@ RUN apk update ; \
   make -j $(nproc) ; \
   make install
 
+# Build final image
 FROM alpine:3.22
 
 LABEL name="docker-weechat" \
