@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v6
       - name: Extract Weechat version from Dockerfile
         run: |
-          WEECHAT_VERSION=$(grep -oP 'ARG WEECHAT_VERSION="\K[^"]+' Dockerfile)
+          WEECHAT_VERSION=$(grep -oP 'ARG WEECHAT_VERSION="?v?\K[0-9][^"\s]*' Dockerfile)
           echo "WEECHAT_VERSION=${WEECHAT_VERSION}" >> $GITHUB_ENV
           echo "WEECHAT_MAJOR=$(echo ${WEECHAT_VERSION} | cut -d. -f1)" >> $GITHUB_ENV
           echo "WEECHAT_MINOR=$(echo ${WEECHAT_VERSION} | cut -d. -f1-2)" >> $GITHUB_ENV
