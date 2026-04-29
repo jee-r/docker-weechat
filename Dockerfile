@@ -121,7 +121,9 @@ RUN set -eux; \
     ruby-dev \
     ruby-libs \
     aspell-libs \
-    aspell-dev ; \
+    aspell-dev \
+    tcl \
+    guile ; \
   rm -rf /tmp/* /var/cache/apk/* ; \
   ln -sf /opt/weechat/bin/weechat /usr/bin/weechat ; \
   ln -sf /opt/weechat/bin/weechat-headless /usr/bin/weechat-headless
