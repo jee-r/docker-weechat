@@ -5,7 +5,7 @@ ENV HOME=/config \
   TERM=screen-256color \
   LANG=C.UTF-8
 
-# renovate: datasource=github-releases depName=weechat/weechat
+# renovate: datasource=github-releases depName=weechat/weechat extractVersion=^v?(?<version>.+)
 ARG WEECHAT_VERSION="4.8.1"
 
 RUN set -eux; \
@@ -41,9 +41,9 @@ RUN set -eux; \
 # Get, verify and extract Weechat
 WORKDIR /tmp
 RUN set -eux; \
-    curl -o weechat.tar.xz "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz"; \
+    curl -o weechat.tar.xz "https://weechat.org/files/src/weechat-${WEECHAT_VERSION#v}.tar.xz"; \
     if [ "$WEECHAT_VERSION" != "devel" ]; then \
-        curl -o weechat.tar.xz.asc "https://weechat.org/files/src/weechat-${WEECHAT_VERSION}.tar.xz.asc"; \
+        curl -o weechat.tar.xz.asc "https://weechat.org/files/src/weechat-${WEECHAT_VERSION#v}.tar.xz.asc"; \
         export GNUPGHOME="$(mktemp -d)"; \
         # Import key without triggering gpg-agent
         gpg --batch --no-tty --pinentry-mode loopback \
