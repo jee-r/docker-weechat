@@ -5,6 +5,7 @@ ENV HOME=/config \
   TERM=screen-256color \
   LANG=C.UTF-8
 
+# renovate: datasource=github-releases depName=weechat/weechat
 ARG WEECHAT_VERSION="4.8.1"
 
 RUN set -eux; \
