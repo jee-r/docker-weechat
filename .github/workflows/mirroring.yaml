@@ -1,5 +1,6 @@
 name: Mirroring to remote repos
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
