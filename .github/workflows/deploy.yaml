@@ -47,7 +47,7 @@ jobs:
           echo "WEECHAT_MAJOR=$(echo ${WEECHAT_VERSION} | cut -d. -f1)" >> $GITHUB_ENV
           echo "WEECHAT_MINOR=$(echo ${WEECHAT_VERSION} | cut -d. -f1-2)" >> $GITHUB_ENV
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v3
