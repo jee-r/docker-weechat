@@ -39,7 +39,7 @@ jobs:
       - name: print env
         run: echo $ENV
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Extract Weechat version from Dockerfile
         run: |
           WEECHAT_VERSION=$(grep -oP 'ARG WEECHAT_VERSION="?v?\K[0-9][^"\s]*' Dockerfile)
