@@ -6,7 +6,7 @@ ENV HOME=/config \
   LANG=C.UTF-8
 
 # renovate: datasource=github-releases depName=weechat/weechat extractVersion=^v?(?<version>.+)
-ARG WEECHAT_VERSION=4.9.5
+ARG WEECHAT_VERSION=4.10.0
 
 RUN set -eux; \
   apk update ; \
